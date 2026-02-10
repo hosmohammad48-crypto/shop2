@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>فروشگاه ساده</title>
+  <style>
+    body { font-family: sans-serif; background:#f5f5f5; margin:0; padding:20px; }
+    h1 { text-align:center; }
+    .products { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+    .card { background:#fff; padding:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.1); }
+    .card h3 { margin-top:0; }
+    button { background:#4CAF50; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+    button:hover { opacity:.9; }
+    #cart { margin-top:30px; background:#fff; padding:16px; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+<h1>🛒 فروشگاه من</h1>
+
+<div class="products" id="products"></div>
+
+<div id="cart">
+  <h2>سبد خرید</h2>
+  <ul id="cartItems"></ul>
+</div>
+
+<script>
+  const products = [
+    {id:1, name:'محصول 1', price:10000},
+    {id:2, name:'محصول 2', price:12000},
+    {id:3, name:'محصول 3', price:9000},
+    {id:4, name:'محصول 4', price:15000},
+    {id:5, name:'محصول 5', price:20000},
+    {id:6, name:'محصول 6', price:8000},
+    {id:7, name:'محصول 7', price:17000},
+    {id:8, name:'محصول 8', price:11000},
+    {id:9, name:'محصول 9', price:14000},
+    {id:10, name:'محصول 10', price:22000}
+  ];
+
+  const cart = [];
+
+  const productsDiv = document.getElementById('products');
+  const cartItems = document.getElementById('cartItems');
+
+  products.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = <h3>${p.name}</h3><p>قیمت: ${p.price} تومان</p><button onclick="addToCart('${p.name}')">افزودن</button>;
+    productsDiv.appendChild(div);
+  });
+
+  function addToCart(name){
+    cart.push(name);
+    renderCart();
+  }
+
+  function renderCart(){
+    cartItems.innerHTML = '';
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      cartItems.appendChild(li);
+    });
+  }
+</script>
+
+</body>
+</html>
